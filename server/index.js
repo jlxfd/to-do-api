@@ -23,7 +23,8 @@ app.get('/todo-entries', async(req, res) => {
         const todoEntries = await Product.find({})
         res.status(200).json(todoEntries)
     } catch (error) {
-        console.log(500).json({message: error.message})
+        res.status(500).json({ })
+        console.log(error)
     }
 })
 
@@ -51,14 +52,13 @@ app.put('/todo-entries/:id', async(req, res) => {
     }
 })
 
-
 app.post('/todo-entries', async(req, res) => {
     try {
         const todoEntry = await Product.create(req.body)
         res.status(200).json(todoEntry)
     } catch (error) {
         res.status(500).json({message: error.message})
-        console.log(500).json({message: error.message})
+        console.log(error)
     }
 })
 
@@ -76,7 +76,7 @@ app.delete('/todo-entries/:id', async(req, res) => {
 })
 
 mongoose.
-connect('mongodb+srv://admin:fCI4bQtest@cluster0.pnxdbkq.mongodb.net/ToDoApp?retryWrites=true&w=majority')
+connect('mongodb+srv://admin1:fCI4bQtest@cluster0.2i51a0s.mongodb.net/?retryWrites=true&w=majority')
 .then(() => {
     app.listen(PORT, () => {
         console.log(`To Do App is running on port ${PORT}`)
