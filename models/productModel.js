@@ -4,7 +4,10 @@ const productSchema = mongoose.Schema(
     {
         entry: {
             type: String,
-            required: [true, "Please list your quests"]
+            // required: [true, "Please list your quests"]
+        },
+        complete: {
+            type: Boolean
         }
     },
     {
