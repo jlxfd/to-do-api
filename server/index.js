@@ -38,6 +38,15 @@ app.get('/todo-entries/:id', async(req, res) => {
     }
 })
 
+app.get('/completed-todo-entries', async(req,res) => {
+    try {
+        const completedTodoEntries = await Product.find({ complete: true })
+        res.status(200).json(completedTodoEntries)
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
+
 app.put('/todo-entries/:id', async(req, res) => {
     try {
         const {id} = req.params
