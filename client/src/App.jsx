@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 
 function App() {
   const [todoText, setTodoText] = useState("");
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([]);
   const [data, setData] = useState(null);
+  const [compTodo, setCompTodo] = useState([])
   
   useEffect(() => {
     fetch("http://localhost:3001/todo-entries")
@@ -21,19 +22,6 @@ function App() {
   const handleChange = async e => {
     e.preventDefault();
     setTodoText(e.target.value);
-    // try {
-    //   const response = await fetch('/todo-entries', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ entry: todoText })
-    //   })
-    //   const body = await response.text();
-    //   setTodoText(body)
-    // } catch (error) {
-    //   console.log("Error", error)
-    // }
   }
 
   const handleClick = () => {
@@ -41,9 +29,7 @@ function App() {
     todoText &&
     (fetch('http://localhost:3001/todo-entries', {
       method: 'POST',
-
       body: JSON.stringify({ entry: `${todoText}` }),
-
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -68,6 +54,8 @@ function App() {
     })
     .catch(error => console.log(error));
   }
+
+  
 
   const formatDate = (date) => {
     return new Date(date).toLocaleString('en-us', {month: 'long', day: 'numeric'})
