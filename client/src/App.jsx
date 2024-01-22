@@ -7,6 +7,7 @@ function App() {
   const [data, setData] = useState(null);
   const [compTodos, setCompTodos] = useState([])
   
+  // Fetch data and from API and set todos to the data
   useEffect(() => {
     fetch("http://localhost:3001/todo-entries")
     .then(res => res.json())
@@ -19,11 +20,13 @@ function App() {
     });
   }, []);
 
-  const handleChange = async e => {
+  // Change the value of todoText to what's being written by the user
+  const handleChange = e => {
     e.preventDefault();
     setTodoText(e.target.value);
   }
 
+  // If todoText exists, post the entry on the API
   const handleClick = () => {
     // setTodos([...todos, todoText])
     todoText &&
@@ -41,6 +44,7 @@ function App() {
     }));
   }
 
+  // Delete the entry by using the key as index for splice method
   const handleDelete = (e) => {
     console.log(e.target.dataset.id);
     fetch(`http://localhost:3001/todo-entries/${e.target.dataset.id}`, {
@@ -55,12 +59,13 @@ function App() {
     .catch(error => console.log(error));
   }
 
+  // If check mark is clicked, add entry by setCompTodos then delete the entry
   const handleComplete = (e) => {
     fetch("http://localhost:3001/completed-todo-entries",)
     .then(res => res.json())
     .then(entry => {
-      handleDelete(e)
       setCompTodos([...compTodos, entry])
+      handleDelete(e)
     })
     .catch(error => {
       console.log(error)
